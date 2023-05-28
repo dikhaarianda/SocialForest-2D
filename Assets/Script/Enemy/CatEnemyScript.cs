@@ -67,7 +67,7 @@ public class CatEnemyScript : MonoBehaviour
 
     public void PlayerAttack()
     {
-        Player.Health--;
+        Player.Health-=5;
     }
 
     public void EnemyGetAttack()
