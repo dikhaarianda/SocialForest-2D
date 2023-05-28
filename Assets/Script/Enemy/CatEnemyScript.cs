@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MainEnemyMovement : MonoBehaviour
+public class CatEnemyScript : MonoBehaviour
 {
     [SerializeField] private GameObject[] Points;
     [SerializeField] private GameObject TargetPoint;
@@ -42,7 +42,6 @@ public class MainEnemyMovement : MonoBehaviour
             transform.eulerAngles = Vector2.up * 180;
         }
         AttackCondition();
-        Debug.Log(health);
     }
 
     private void AttackCondition()
@@ -78,7 +77,7 @@ public class MainEnemyMovement : MonoBehaviour
         if (health == 0)
         {
             animator.SetTrigger("isDead");
-            // Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 }
