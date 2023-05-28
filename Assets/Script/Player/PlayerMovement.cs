@@ -33,6 +33,11 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
         }
+
+        if (Health == 0)
+        {
+            Time.timeScale = 0f;
+        }
     }
 
     private void FixedUpdate() {

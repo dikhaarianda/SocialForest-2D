@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class DogEnemyScript : MonoBehaviour
@@ -41,7 +42,17 @@ public class DogEnemyScript : MonoBehaviour
         {
             transform.eulerAngles = Vector2.up * 180;
         }
-        AttackCondition();
+
+        if (health <= 0)
+        {
+            animator.SetTrigger("isDead");
+            speed = 0;
+            StartCoroutine(DelayTimer());
+        }
+        else
+        {
+            AttackCondition();
+        }
     }
 
     private void AttackCondition()
@@ -65,6 +76,12 @@ public class DogEnemyScript : MonoBehaviour
         }
     }
 
+    private IEnumerator DelayTimer()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
+    }
+
     public void PlayerAttack()
     {
         Player.Health-=5;
@@ -74,10 +91,5 @@ public class DogEnemyScript : MonoBehaviour
     {
         health--;
         animator.SetTrigger("isHurt");
-        if (health == 0)
-        {
-            animator.SetTrigger("isDead");
-            Destroy(gameObject);
-        }
     }
 }

@@ -710,7 +710,7 @@ MonoBehaviour:
   - {fileID: 19238315}
   TargetPoint: {fileID: 1131163345}
   AttackRange: 2
-  SeePlayerRange: 5
+  SeePlayerRange: 8
   health: 2
 --- !u!61 &459776315
 BoxCollider2D:
@@ -3012,7 +3012,7 @@ MonoBehaviour:
   - {fileID: 1368986932}
   TargetPoint: {fileID: 1131163345}
   AttackRange: 2
-  SeePlayerRange: 5
+  SeePlayerRange: 8
   health: 2
 --- !u!1 &1588165452
 GameObject:
