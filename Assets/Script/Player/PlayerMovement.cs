@@ -13,12 +13,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] Vector2 boxSize;
+    PlayerAttack enemyEnter;
+    public int Health;
     private bool isGrounded;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        enemyEnter = FindObjectOfType<PlayerAttack>();
     }
 
     private void Update()
@@ -26,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
         dirX = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(dirX * walkSpeed, rb.velocity.y);
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded || enemyEnter.isJumpEnemy)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
         }

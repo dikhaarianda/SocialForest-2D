@@ -12,9 +12,13 @@ public class MainEnemyMovement : MonoBehaviour
     [SerializeField] private float AttackRange;
     [SerializeField] private float SeePlayerRange;
 
+    private PlayerMovement Player;
+    [SerializeField] private int health = 2;
+
     void Start()
     {
         animator = GetComponent<Animator>();
+        Player = FindObjectOfType<PlayerMovement>();
     }
 
     void Update()
@@ -38,6 +42,7 @@ public class MainEnemyMovement : MonoBehaviour
             transform.eulerAngles = Vector2.up * 180;
         }
         AttackCondition();
+        Debug.Log(health);
     }
 
     private void AttackCondition()
@@ -58,6 +63,22 @@ public class MainEnemyMovement : MonoBehaviour
         {
             speed = 2;
             animator.SetTrigger("isWalk");
+        }
+    }
+
+    public void PlayerAttack()
+    {
+        Player.Health--;
+    }
+
+    public void EnemyGetAttack()
+    {
+        health--;
+        animator.SetTrigger("isHurt");
+        if (health == 0)
+        {
+            animator.SetTrigger("isDead");
+            // Destroy(gameObject);
         }
     }
 }
