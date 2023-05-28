@@ -1,11 +1,16 @@
 using UnityEngine;
 
-public class DogMovement : MonoBehaviour
+public class MainEnemyMovement : MonoBehaviour
 {
     [SerializeField] private GameObject[] Points;
-    [SerializeField] private float speed;
+    [SerializeField] private GameObject TargetPoint;
     private Animator animator;
+    private float speed;
     private int PointIndex = 0;
+
+    [Header("Attack")]
+    [SerializeField] private float AttackRange;
+    [SerializeField] private float SeePlayerRange;
 
     void Start()
     {
@@ -27,11 +32,31 @@ public class DogMovement : MonoBehaviour
         if (PointIndex > 0)
         {
             transform.eulerAngles = Vector2.zero;
-            animator.SetTrigger("isWalk");
         }
         else
         {
             transform.eulerAngles = Vector2.up * 180;
+        }
+        AttackCondition();
+    }
+
+    private void AttackCondition()
+    {
+        float dist = Vector2.Distance(TargetPoint.transform.position, transform.position);
+
+        if (dist <= AttackRange && TargetPoint.transform.position.y > transform.position.y)
+        {
+            animator.SetTrigger("isAttack");
+            speed = 0;
+        }
+        else if (dist < SeePlayerRange)
+        {
+            speed = 8;
+            animator.SetTrigger("isWalk");
+        }
+        else
+        {
+            speed = 2;
             animator.SetTrigger("isWalk");
         }
     }
