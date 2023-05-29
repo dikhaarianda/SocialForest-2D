@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Health <= 0)
         {
+            Health = 0;
             Time.timeScale = 0f;
         }
         healtText.text = Health.ToString();
