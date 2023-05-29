@@ -10,6 +10,7 @@ public class GameOver : MonoBehaviour
 
     public void BackScene()
     {
+        PlayerPrefs.DeleteAll();
         SceneManager.LoadScene(sceneName);
     }
 }

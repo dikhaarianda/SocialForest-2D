@@ -8,6 +8,17 @@ public class PlayerCollecting : MonoBehaviour
     private bool isAnOrganic;
     private int money;
 
+    private void Start() {
+        if (PlayerPrefs.HasKey("money"))
+        {
+            money = PlayerPrefs.GetInt("money");
+        }
+        else
+        {
+            PlayerPrefs.SetInt("money", 0);
+        }
+    }
+
     private void FixedUpdate() {
         if (isOrganic)
         {
@@ -20,8 +31,8 @@ public class PlayerCollecting : MonoBehaviour
             money += 1500;
             isAnOrganic = false;
         }
-
         moneyText.text = money.ToString();
+        PlayerPrefs.SetInt("money", money);
     }
 
     private void OnCollisionEnter2D(Collision2D other) {

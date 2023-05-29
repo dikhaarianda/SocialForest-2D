@@ -1,5 +1,6 @@
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -26,6 +27,15 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         enemyEnter = FindObjectOfType<PlayerAttack>();
+
+        if (PlayerPrefs.HasKey("health"))
+        {
+            Health = PlayerPrefs.GetInt("health");
+        }
+        else
+        {
+            PlayerPrefs.SetInt("health", 100);
+        }
     }
 
     private void Update()
@@ -41,9 +51,10 @@ public class PlayerMovement : MonoBehaviour
         if (Health <= 0)
         {
             Health = 0;
-            Time.timeScale = 0f;
+            SceneManager.LoadScene("Game Over");
         }
         healtText.text = Health.ToString();
+        PlayerPrefs.SetInt("health", Health);
     }
 
     private void FixedUpdate() {
