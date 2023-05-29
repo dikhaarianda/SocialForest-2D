@@ -15,6 +15,7 @@ public class SceneLoad : MonoBehaviour
 
     public void NextScene(int index)
     {
+        PlayerPrefs.DeleteAll();
         StartCoroutine(LoadScene(index));
     }
 
