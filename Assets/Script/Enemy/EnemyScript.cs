@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class CatEnemyScript : MonoBehaviour
+public class EnemyScript : MonoBehaviour
 {
     [SerializeField] private GameObject[] Points;
     [SerializeField] private GameObject TargetPoint;
@@ -12,9 +12,9 @@ public class CatEnemyScript : MonoBehaviour
     [Header("Attack")]
     [SerializeField] private float AttackRange;
     [SerializeField] private float SeePlayerRange;
+    [SerializeField] private int health;
 
     private PlayerMovement Player;
-    [SerializeField] private int health = 2;
 
     void Start()
     {
@@ -79,7 +79,7 @@ public class CatEnemyScript : MonoBehaviour
     private IEnumerator DelayTimer()
     {
         yield return new WaitForSeconds(0.5f);
-        Destroy(gameObject);
+        Destroy(transform.parent.gameObject);
     }
 
     public void PlayerAttack()
