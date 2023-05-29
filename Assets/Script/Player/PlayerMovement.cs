@@ -1,3 +1,4 @@
+using UnityEngine.UI;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -14,8 +15,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] Vector2 boxSize;
     PlayerAttack enemyEnter;
-    public int Health;
     private bool isGrounded;
+
+    [Header("UI")]
+    [SerializeField] private Text healtText;
+    public int Health;
 
     private void Start()
     {
@@ -38,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Time.timeScale = 0f;
         }
+        healtText.text = Health.ToString();
     }
 
     private void FixedUpdate() {
