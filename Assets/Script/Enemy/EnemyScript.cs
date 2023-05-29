@@ -15,6 +15,7 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private int health;
 
     private PlayerMovement Player;
+    private bool isSeePlayer;
 
     void Start()
     {
@@ -58,21 +59,31 @@ public class EnemyScript : MonoBehaviour
     private void AttackCondition()
     {
         float dist = Vector2.Distance(TargetPoint.transform.position, transform.position);
+        bool isAttack = false;
 
         if (dist <= AttackRange && TargetPoint.transform.position.y > transform.position.y)
         {
             animator.SetTrigger("isAttack");
             speed = 0;
+            isAttack = true;
         }
         else if (dist < SeePlayerRange)
         {
+            isSeePlayer = true;
+        }
+
+        if (isSeePlayer && !isAttack)
+        {
             speed = 8;
             animator.SetTrigger("isWalk");
+            isAttack = false;
         }
-        else
+
+        if(!isSeePlayer && !isAttack)
         {
             speed = 2;
             animator.SetTrigger("isWalk");
+            isAttack = false;
         }
     }
 
